@@ -821,7 +821,7 @@ function toggleFAQ(btn) {
 // ── FORM ──
 // Backend base URL. Change this to your deployed backend's URL once you pick a host
 // (e.g. Render, Fly.io, PythonAnywhere). Falls back to localhost for local dev.
-const API_BASE_URL = window.HVACAPP_API_BASE || 'http://127.0.0.1:5000';
+const API_BASE_URL = window.HVACAPP_API_BASE || 'https://urochordal-kieth-radiotelegraphic.ngrok-free.dev';
 
 async function submitForm() {
   const fields = {
@@ -853,7 +853,7 @@ async function submitForm() {
   try {
     const res = await fetch(`${API_BASE_URL}/api/early-access`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' },
       body: JSON.stringify(fields),
     });
     if (!res.ok) throw new Error('request_failed');
