@@ -819,6 +819,10 @@ function toggleFAQ(btn) {
 }
 
 // ── FORM ──
+// Backend base URL. Change this to your deployed backend's URL once you pick a host
+// (e.g. Render, Fly.io, PythonAnywhere). Falls back to localhost for local dev.
+const API_BASE_URL = window.HVACAPP_API_BASE || 'http://127.0.0.1:5000';
+
 async function submitForm() {
   const fields = {
     first_name: document.getElementById('fname').value.trim(),
@@ -847,7 +851,7 @@ async function submitForm() {
   submitBtn.textContent = 'Submitting…';
 
   try {
-    const res = await fetch('/api/early-access', {
+    const res = await fetch(`${API_BASE_URL}/api/early-access`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(fields),

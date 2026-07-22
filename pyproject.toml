@@ -1,0 +1,15 @@
+[project]
+name = "hvacapp"
+version = "0.1.0"
+description = "HVACapp backend — captures early-access form submissions"
+requires-python = ">=3.14"
+dependencies = [
+    "flask>=3.1",
+    "flask-cors>=5.0",
+    "python-dotenv>=1.0",
+]
+
+[dependency-groups]
+dev = [
+    "gunicorn>=23.0",
+]
