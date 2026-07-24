@@ -19,7 +19,7 @@ ALLOWED_ORIGINS = [
     o.strip()
     for o in os.environ.get(
         "ALLOWED_ORIGINS",
-        "https://autopermit.github.io,http://localhost:8000,http://127.0.0.1:8000",
+        "https://hvacapp.us,https://www.hvacapp.us,https://autopermit.github.io,http://localhost:8000,http://127.0.0.1:8000",
     ).split(",")
     if o.strip()
 ]
