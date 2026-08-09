@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f3f3ef">
+<title>HVAC-01 — Contractor Services Order & Scope Worksheet</title>
+<meta name="description" content="Contractor services order worksheet for websites, lead generation, and permit automation.">
+<style>
+:root{
+  --paper:#f3f3ef;
+  --sheet:#ffffff;
+  --ink:#111;
+  --muted:#5c5c57;
+  --line:#161616;
+  --hair:#c9c9c2;
+  --field:#fafaf7;
+  --stamp:#204f86;
+  --stamp-soft:#eaf1f8;
+  --sans:Arial,Helvetica,sans-serif;
+  --mono:"Courier New",Courier,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.35}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.shell{max-width:1180px;margin:0 auto;padding:22px}
+.sheet{background:var(--sheet);border:2px solid var(--line);box-shadow:0 10px 28px rgba(0,0,0,.06)}
+.form-head{display:grid;grid-template-columns:1fr auto;border-bottom:2px solid var(--line)}
+.form-head-main{padding:20px 22px}
+.form-id{border-left:2px solid var(--line);padding:16px 20px;min-width:260px;display:flex;flex-direction:column;justify-content:space-between}
+.kicker{font:700 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(28px,4.6vw,56px);line-height:.95;letter-spacing:-.045em;margin:8px 0 10px}
+.sub{font-size:15px;max-width:760px;color:var(--muted)}
+.form-id strong{font:700 18px var(--mono)}
+.form-id small{font:12px var(--mono);color:var(--muted)}
+.notice{display:grid;grid-template-columns:160px 1fr;border-bottom:2px solid var(--line);background:var(--stamp-soft)}
+.notice-label{padding:11px 14px;border-right:1px solid var(--line);font:700 11px var(--mono);text-transform:uppercase;letter-spacing:.08em}
+.notice-copy{padding:11px 14px;font-size:13px}
+.section{border-bottom:2px solid var(--line)}
+.section:last-child{border-bottom:0}
+.section-title{display:grid;grid-template-columns:54px 1fr auto;border-bottom:1px solid var(--line);background:#f7f7f3}
+.section-no{padding:10px 12px;border-right:1px solid var(--line);font:700 12px var(--mono)}
+.section-name{padding:10px 12px;font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+.section-help{padding:10px 12px;color:var(--muted);font:12px var(--mono)}
+.grid{display:grid}
+.cols-2{grid-template-columns:1fr 1fr}
+.cols-3{grid-template-columns:repeat(3,1fr)}
+.cell{padding:14px;border-right:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.cell:last-child{border-right:0}
+.cell label,.field-label{display:block;font:700 10px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px}
+input,select,textarea{width:100%;border:1px solid var(--line);background:var(--field);padding:10px 11px;border-radius:0;outline:none}
+input:focus,select:focus,textarea:focus{box-shadow:0 0 0 2px var(--stamp)}
+.fee-text{font-weight:700;font-family:var(--mono);font-size:12px;display:inline-block;padding:7px 0}
+.fee-text.pending{color:var(--stamp)}
+textarea{min-height:82px;resize:vertical}
+.service-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+.service{position:relative;padding:18px;border-right:1px solid var(--line);min-height:248px;background:#fff}
+.service:last-child{border-right:0}
+.service.selected{background:var(--stamp-soft)}
+.service-top{display:flex;justify-content:space-between;gap:12px}
+.checkline{display:flex;gap:9px;align-items:flex-start}
+.checkline input{width:18px;height:18px;accent-color:var(--stamp);margin-top:1px}
+.service-code{font:700 11px var(--mono);color:var(--muted)}
+.service h2{font-size:24px;letter-spacing:-.03em;margin:14px 0 5px}
+.outcome{font-weight:700;margin-bottom:12px}
+.service ul{margin:0;padding-left:18px;color:var(--muted);font-size:13px}
+.service li{margin:5px 0}
+.pricebox{margin-top:18px;border-top:1px solid var(--line);padding-top:10px;display:flex;justify-content:space-between;align-items:end}
+.pricebox span{font:10px var(--mono);text-transform:uppercase;color:var(--muted)}
+.pricebox strong{font-size:21px}
+.scope-table{width:100%;border-collapse:collapse}
+.scope-table th,.scope-table td{border-bottom:1px solid var(--hair);border-right:1px solid var(--hair);padding:10px 12px;text-align:left;vertical-align:top}
+.scope-table th:last-child,.scope-table td:last-child{border-right:0}
+.scope-table th{font:700 10px var(--mono);text-transform:uppercase;letter-spacing:.08em;background:#fafaf7}
+.scope-table td{font-size:13px}
+.money{text-align:right!important;white-space:nowrap}
+.route{padding:16px;background:#fbfbf8}
+.route-box{border:2px solid var(--stamp);display:grid;grid-template-columns:190px 1fr}
+.route-status{padding:14px;border-right:1px solid var(--stamp);background:var(--stamp-soft)}
+.route-status small{display:block;font:10px var(--mono);text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.route-status strong{font-size:18px}
+.route-copy{padding:14px;font-size:13px}
+.total-grid{display:grid;grid-template-columns:1fr 360px}
+.total-notes{padding:16px;border-right:1px solid var(--line)}
+.total-box{padding:0}
+.total-row{display:grid;grid-template-columns:1fr 130px;border-bottom:1px solid var(--line)}
+.total-row:last-child{border-bottom:0}
+.total-row span,.total-row strong{padding:11px 12px}
+.total-row strong{text-align:right;border-left:1px solid var(--line)}
+.total-row.grand{font-size:18px;background:#f7f7f3}
+.actions{display:flex;gap:10px;flex-wrap:wrap;padding:16px;background:#f7f7f3;border-top:1px solid var(--line)}
+.btn{border:1px solid var(--line);background:#fff;padding:11px 14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:12px}
+.btn.primary{background:var(--stamp);border-color:var(--stamp);color:#fff}
+.btn.dark{background:#111;color:#fff}
+.btn:hover{filter:brightness(.96)}
+.contract{padding:22px;font-family:"Times New Roman",serif}
+.contract h3{font-family:var(--sans);font-size:22px;margin:0 0 12px}
+.contract h4{font-family:var(--sans);font-size:12px;text-transform:uppercase;margin:20px 0 6px}
+.contract p,.contract li{font-size:13px;line-height:1.5}
+.signature-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:34px}
+.sigline{border-top:1px solid #111;padding-top:6px;font-size:12px}
+.agreement-doc{max-width:820px;margin:0 auto;color:#111;background:#fff}
+.agreement-head{display:grid;grid-template-columns:1fr 190px;border-bottom:4px solid var(--stamp);padding-bottom:18px;margin-bottom:18px;font-family:var(--sans)}
+.agreement-brand{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--stamp);margin-bottom:8px}
+.agreement-head h3{font-size:30px;line-height:1;letter-spacing:-.035em;margin:0 0 8px}
+.agreement-deck{font-size:13px;color:var(--muted);max-width:520px}
+.agreement-meta{border-left:1px solid var(--hair);padding-left:18px;font:10px var(--mono);text-transform:uppercase;letter-spacing:.06em;line-height:1.8;color:var(--muted)}
+.agreement-meta b{color:#111;font-size:11px}
+.trust-band{display:grid;grid-template-columns:150px 1fr;border:1px solid var(--stamp);background:var(--stamp-soft);margin:0 0 18px;font-family:var(--sans)}
+.trust-band strong{padding:14px;border-right:1px solid var(--stamp);font-size:19px;letter-spacing:-.02em;color:var(--stamp)}
+.trust-band span{padding:14px;font-size:12px;line-height:1.45}
+.job-grid{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--line);margin:0 0 20px;font-family:var(--sans)}
+.job-item{padding:10px 12px;border-right:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.job-item:nth-child(2n){border-right:0}.job-item:nth-last-child(-n+2){border-bottom:0}
+.job-item small{display:block;font:9px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:3px}
+.job-item b{font-size:12px}
+.doc-section{margin:20px 0 0}
+.doc-section-title{display:flex;align-items:center;gap:10px;font:800 11px var(--sans);text-transform:uppercase;letter-spacing:.08em;margin:0 0 9px}
+.doc-section-title:after{content:"";height:1px;background:var(--hair);flex:1}
+.the-job{border-left:4px solid var(--stamp);padding:12px 14px;background:#f8fafc;font-family:var(--sans);font-size:12px;line-height:1.5}
+.scope-block{border:1px solid var(--line);margin:8px 0 0;font-family:var(--sans)}
+.scope-line{display:grid;grid-template-columns:34px 145px 1fr;border-bottom:1px solid var(--hair)}
+.scope-line:last-child{border-bottom:0}.scope-code{padding:10px;text-align:center;font:700 10px var(--mono);background:#f7f7f3;border-right:1px solid var(--hair)}
+.scope-name{padding:10px 12px;font-weight:700;font-size:12px;border-right:1px solid var(--hair)}
+.scope-desc{padding:10px 12px;font-size:11.5px;line-height:1.45;color:#333}
+.ownership-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;font-family:var(--sans)}
+.ownership-box{border:1px solid var(--line);padding:13px}
+.ownership-box h5{margin:0 0 9px;font:800 11px var(--sans);text-transform:uppercase;letter-spacing:.04em}
+.ownership-box ul{margin:0;padding-left:17px}.ownership-box li{font-size:11px;line-height:1.45;margin:5px 0}
+.fee-summary{width:100%;border-collapse:collapse;font-family:var(--sans);margin-top:7px}
+.fee-summary th,.fee-summary td{padding:9px 10px;border-bottom:1px solid var(--hair);font-size:11px;text-align:left}.fee-summary th{font:700 9px var(--mono);text-transform:uppercase;letter-spacing:.06em;background:#f7f7f3}.fee-summary td:last-child,.fee-summary th:last-child{text-align:right}.fee-summary .total td{font-weight:800;border-top:2px solid var(--line);border-bottom:0;font-size:12px}
+.next-steps{counter-reset:next;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);font-family:var(--sans)}
+.next-step{padding:11px;border-right:1px solid var(--hair);font-size:10.5px;line-height:1.35}.next-step:last-child{border-right:0}.next-step:before{counter-increment:next;content:counter(next);display:block;font:800 10px var(--mono);color:var(--stamp);margin-bottom:5px}
+.terms{font-family:var(--sans);font-size:10px;line-height:1.45;color:#333}.terms p{font-size:10px!important;line-height:1.45!important;margin:7px 0}.terms b{color:#111}
+.signature-grid.pro{margin-top:24px;gap:28px;font-family:var(--sans)}
+.signature-grid.pro .sigline{font-size:10.5px;line-height:1.5}
+.doc-foot{display:flex;justify-content:space-between;gap:20px;margin-top:24px;padding-top:8px;border-top:1px solid var(--hair);font:8.5px var(--mono);color:var(--muted)}
+.footer-note{padding:14px 16px;font:10px var(--mono);color:var(--muted);background:#f7f7f3;border-top:1px solid var(--line)}
+.stickybar{position:sticky;bottom:0;background:rgba(243,243,239,.94);backdrop-filter:blur(8px);border-top:1px solid var(--hair);padding:10px 0;margin-top:14px}
+.stickybar-inner{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;justify-content:space-between;align-items:center;gap:14px}
+.sticky-summary{font:12px var(--mono)}
+.hidden{display:none!important}
+@media(max-width:820px){
+  .form-head{grid-template-columns:1fr}.form-id{border-left:0;border-top:2px solid var(--line);min-width:0}
+  .notice{grid-template-columns:1fr}.notice-label{border-right:0;border-bottom:1px solid var(--line)}
+  .cols-2,.cols-3,.service-grid,.total-grid{grid-template-columns:1fr}
+  .service{border-right:0;border-bottom:1px solid var(--line)}
+  .total-notes{border-right:0;border-bottom:1px solid var(--line)}
+  .section-title{grid-template-columns:44px 1fr}.section-help{display:none}
+  .signature-grid{grid-template-columns:1fr}
+  .stickybar-inner{align-items:flex-start;flex-direction:column}
+}
+@media print{
+  body{background:#fff}
+  .shell{max-width:none;padding:0}
+  .sheet{border:0;box-shadow:none}
+  .actions,.stickybar,.no-print{display:none!important}
+  .service.selected{background:#fff}
+
+  /* When an agreement has been generated, print only the agreement itself —
+     the blank worksheet fields above it are working UI, not the deliverable. */
+  body.agreement-built .worksheet-only{display:none!important}
+  body.agreement-built #agreementSection{border:0}
+  body.agreement-built .contract{padding:0}
+  body.agreement-built .agreement-doc{max-width:none}
+  body.agreement-built .agreement-head{break-inside:avoid}
+  body.agreement-built .trust-band,
+  body.agreement-built .job-grid,
+  body.agreement-built .scope-block,
+  body.agreement-built .ownership-grid,
+  body.agreement-built .fee-summary,
+  body.agreement-built .next-steps,
+  body.agreement-built .signature-grid{break-inside:avoid}
+  body.agreement-built .doc-section{break-inside:avoid-page}
+  body.agreement-built .agreement-head h3{font-size:26px}
+  body.agreement-built .agreement-deck{font-size:11px}
+  body.agreement-built .trust-band strong{font-size:17px}
+  body.agreement-built .trust-band span{font-size:10.5px}
+  body.agreement-built .job-item b{font-size:10.5px}
+  body.agreement-built .scope-desc{font-size:10.2px}
+  body.agreement-built .ownership-box li{font-size:9.8px}
+  body.agreement-built .next-step{font-size:9.5px}
+  body.agreement-built .terms p{font-size:9px!important}
+  @page{size:Letter;margin:.48in .55in}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <main class="sheet">
+    <header class="form-head worksheet-only">
+      <div class="form-head-main">
+        <div class="kicker">Stewart HVAC · Contractor Services</div>
+        <h1>HVAC-01</h1>
+        <div class="sub">Contractor Services Order &amp; Scope Worksheet. Select what the business needs, price the work, and generate the next-step agreement from one page.</div>
+      </div>
+      <div class="form-id">
+        <div>
+          <small>FORM NO.</small><br>
+          <strong>HVAC-01</strong>
+        </div>
+        <div><small>REV. 08/2026<br>FOR HVAC CONTRACTORS</small></div>
+      </div>
+    </header>
+
+    <div class="notice worksheet-only">
+      <div class="notice-label">Use this form when</div>
+      <div class="notice-copy">The contractor needs to <b>look professional</b>, <b>get more calls</b>, or <b>spend less office time on permits</b>.</div>
+    </div>
+
+    <section class="section worksheet-only" id="buyer">
+      <div class="section-title"><div class="section-no">01</div><div class="section-name">Contractor Information</div><div class="section-help">Complete what is known</div></div>
+      <div class="grid cols-2">
+        <div class="cell"><label for="client">HVAC company</label><input id="client" placeholder="Company name"></div>
+        <div class="cell"><label for="contact">Primary contact</label><input id="contact" placeholder="Name"></div>
+        <div class="cell"><label for="email">Email</label><input id="email" type="email" placeholder="name@company.com"></div>
+        <div class="cell"><label for="phone">Phone</label><input id="phone" type="tel" placeholder="(555) 000-0000"></div>
+        <div class="cell"><label for="website">Current website</label><input id="website" placeholder="URL or none"></div>
+        <div class="cell"><label for="serviceArea">Primary service area</label><input id="serviceArea" placeholder="City / county / region"></div>
+      </div>
+    </section>
+
+    <section class="section worksheet-only" id="services">
+      <div class="section-title"><div class="section-no">02</div><div class="section-name">Select Services</div><div class="section-help">Check all that apply</div></div>
+      <div class="service-grid">
+        <article class="service selected" data-key="website">
+          <div class="service-top">
+            <label class="checkline"><input class="service-check" id="svcWebsite" type="checkbox" checked><span><b>Website</b></span></label>
+            <span class="service-code">A</span>
+          </div>
+          <h2>Look Professional</h2>
+          <div class="outcome">A clean website customers can trust.</div>
+          <ul>
+            <li>Mobile-friendly contractor website</li>
+            <li>Services and service-area pages</li>
+            <li>Click-to-call and estimate forms</li>
+            <li>Maps, reviews, analytics</li>
+          </ul>
+          <div class="pricebox"><span>Starting price</span><strong>$499</strong></div>
+        </article>
+
+        <article class="service" data-key="leads">
+          <div class="service-top">
+            <label class="checkline"><input class="service-check" id="svcLeads" type="checkbox"><span><b>Lead Generation</b></span></label>
+            <span class="service-code">B</span>
+          </div>
+          <h2>Get More Calls</h2>
+          <div class="outcome">Make the website produce measurable demand.</div>
+          <ul>
+            <li>Local landing pages</li>
+            <li>Lead and call tracking</li>
+            <li>Search campaign support</li>
+            <li>Monthly performance reporting</li>
+          </ul>
+          <div class="pricebox"><span>Typical range</span><strong>$1.5k–$5k</strong></div>
+        </article>
+
+        <article class="service" data-key="permits">
+          <div class="service-top">
+            <label class="checkline"><input class="service-check" id="svcPermits" type="checkbox"><span><b>Permit Automation</b></span></label>
+            <span class="service-code">C</span>
+          </div>
+          <h2>Stop Chasing Permits</h2>
+          <div class="outcome">Reduce repetitive permit-office work.</div>
+          <ul>
+            <li>Permit intake</li>
+            <li>Form and document preparation</li>
+            <li>Status tracking</li>
+            <li>Jurisdiction-specific workflow setup</li>
+          </ul>
+          <div class="pricebox"><span>Pricing</span><strong>Custom</strong></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section worksheet-only">
+      <div class="section-title"><div class="section-no">03</div><div class="section-name">Need / Job Notes</div><div class="section-help">Use the contractor's language</div></div>
+      <div class="grid cols-2">
+        <div class="cell"><label for="goal">What should be better after this work?</label><textarea id="goal" placeholder="Example: We need more replacement calls and less time spent retyping permit paperwork."></textarea></div>
+        <div class="cell"><label for="pain">What is getting in the way today?</label><textarea id="pain" placeholder="Example: Old website, weak Google visibility, permit backlog, office staff re-entering the same information."></textarea></div>
+        <div class="cell"><label for="offers">Services to emphasize</label><textarea id="offers" placeholder="AC repair, heat pumps, furnace replacement, maintenance plans..."></textarea></div>
+        <div class="cell"><label for="systems">Systems / tools already in use</label><textarea id="systems" placeholder="CRM, call tracking, QuickBooks, Google Business Profile, permit portals..."></textarea></div>
+      </div>
+    </section>
+
+    <section class="section worksheet-only">
+      <div class="section-title"><div class="section-no">04</div><div class="section-name">Price &amp; Terms</div><div class="section-help">Seller may adjust working quote</div></div>
+      <table class="scope-table">
+        <thead><tr><th>Line</th><th>Description</th><th>Included</th><th class="money">Working Fee</th></tr></thead>
+        <tbody>
+          <tr><td>A</td><td>Contractor website</td><td id="incWebsite">Yes</td><td class="money"><span class="fee-text">$499</span></td></tr>
+          <tr><td>B</td><td>Lead generation</td><td id="incLeads">No</td><td class="money"><span class="fee-text">$1,500-$5,000</span></td></tr>
+          <tr><td>C</td><td>Permit automation</td><td id="incPermits">No</td><td class="money"><span class="fee-text pending">Custom after discovery</span></td></tr>
+        </tbody>
+      </table>
+      <div class="grid cols-3">
+        <div class="cell"><label for="deposit">Deposit</label><select id="deposit"><option value="50">50%</option><option value="25">25%</option><option value="0">No deposit</option><option value="100">100%</option></select></div>
+        <div class="cell"><label for="balance">Balance due</label><select id="balance"><option>On delivery</option><option>Before launch</option><option>Net 7 after delivery</option><option>Net 15 after delivery</option></select></div>
+        <div class="cell"><label for="timing">Target timing</label><input id="timing" placeholder="Before cooling season"></div>
+      </div>
+      <div class="route">
+        <div class="route-box">
+          <div class="route-status"><small>Recommended route</small><strong id="routeTitle">Website First</strong></div>
+          <div class="route-copy" id="routeCopy">Start with the concrete $499 website offer. It gives the contractor something immediately useful and creates the base for later lead generation and permit automation.</div>
+        </div>
+      </div>
+      <div class="total-grid">
+        <div class="total-notes">
+          <label class="field-label" for="notes">Seller notes / exclusions</label>
+          <textarea id="notes" placeholder="Ad spend, permit fees, third-party subscriptions, hosting, domains, integrations, unusual scope, or anything not included."></textarea>
+        </div>
+        <div class="total-box">
+          <div class="total-row"><span>Subtotal</span><strong id="subtotal">$499</strong></div>
+          <div class="total-row"><span>Deposit due</span><strong id="depositDue">$250</strong></div>
+          <div class="total-row grand"><span><b>Project total</b></span><strong id="grandTotal">$499</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section worksheet-only" id="next">
+      <div class="section-title"><div class="section-no">05</div><div class="section-name">Continue Sales Process</div><div class="section-help">Generate the next artifact</div></div>
+      <div class="actions">
+        <button class="btn primary" id="generateAgreement">Generate Agreement</button>
+        <button class="btn dark" id="printAgreement">Print / Save PDF</button>
+        <button class="btn" id="copySummary">Copy Handoff</button>
+        <button class="btn" id="copyEmail">Copy Client Email</button>
+        <button class="btn" id="saveDraft">Save Draft</button>
+        <button class="btn" id="clearDraft">Clear</button>
+      </div>
+    </section>
+
+    <section class="section hidden" id="agreementSection">
+      <div class="section-title worksheet-only"><div class="section-no">06</div><div class="section-name">Generated Agreement</div><div class="section-help">Review before sending</div></div>
+      <div class="contract" id="agreement"></div>
+    </section>
+
+    <div class="footer-note worksheet-only">Stewart HVAC · HVAC contractor service worksheet. This page is a sales and scoping aid. Final commercial terms should be reviewed before execution.</div>
+  </main>
+</div>
+
+<div class="stickybar no-print">
+  <div class="stickybar-inner">
+    <div class="sticky-summary"><b id="stickyRoute">Website First</b> · <span id="stickyTotal">$499</span> · <span id="stickyClient">No contractor entered</span></div>
+    <button class="btn primary" onclick="document.getElementById('next').scrollIntoView({behavior:'smooth'})">Continue →</button>
+  </div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(Number(n)||0);
+const value=id=>($(id)?.value||'').trim();
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+const checks = {
+  website:$('svcWebsite'),
+  leads:$('svcLeads'),
+  permits:$('svcPermits')
+};
+const SERVICE_FEES={website:{label:'$499',amount:499},leads:{label:'$1,500-$5,000',amount:null},permits:{label:'Custom after discovery',amount:null}};
+
+function syncServices(source){
+  document.querySelectorAll('.service').forEach(card=>{
+    const key=card.dataset.key;
+    card.classList.toggle('selected',checks[key].checked);
+  });
+  $('incWebsite').textContent=checks.website.checked?'Yes':'No';
+  $('incLeads').textContent=checks.leads.checked?'Yes':'No';
+  $('incPermits').textContent=checks.permits.checked?'Yes':'No';
+
+
+  updateAll();
+}
+Object.keys(checks).forEach(key=>checks[key].addEventListener('change',()=>syncServices(key)));
+
+function hasPendingScope(){return checks.leads.checked||checks.permits.checked}
+function fixedTotal(){return checks.website.checked ? 499 : 0}
+function totalLabel(){return hasPendingScope() ? (fixedTotal()?money(fixedTotal())+' + scoped services':'Pending final scope') : money(fixedTotal())}
+function depositLabel(){if(hasPendingScope()) return 'Set with final scope'; const dep=Number($('deposit').value||0)/100; return money(fixedTotal()*dep)}
+function route(){
+  if(checks.permits.checked) return {
+    title:'Permit Discovery',
+    copy:'Permit automation is the highest-complexity route. Confirm jurisdictions, forms, systems, credentials, handoffs, and human steps before making a final implementation commitment.'
+  };
+  if(checks.leads.checked) return {
+    title:'Lead Generation',
+    copy:'The contractor wants more calls or booked work. Confirm service area, offer, tracking, campaign budget, and how incoming leads are handled before launch.'
+  };
+  return {
+    title:'Website First',
+    copy:'Start with the concrete $499 website offer. It gives the contractor something immediately useful and creates the base for later lead generation and permit automation.'
+  };
+}
+function updateAll(){
+  const r=route();
+  $('subtotal').textContent=totalLabel();
+  $('grandTotal').textContent=totalLabel();
+  $('depositDue').textContent=depositLabel();
+  $('routeTitle').textContent=r.title;
+  $('routeCopy').textContent=r.copy;
+  $('stickyRoute').textContent=r.title;
+  $('stickyTotal').textContent=totalLabel();
+  $('stickyClient').textContent=value('client')||'No contractor entered';
+}
+document.querySelectorAll('input,select,textarea').forEach(el=>el.addEventListener('input',updateAll));
+document.querySelectorAll('select').forEach(el=>el.addEventListener('change',updateAll));
+
+function scopeList(){
+  const out=[];
+  if(checks.website.checked) out.push('Website: mobile-friendly contractor site, service / service-area content, contact and estimate capture, maps / reviews, and basic analytics.');
+  if(checks.leads.checked) out.push('Lead generation: approved landing pages, tracking, campaign support, and reporting within the agreed scope.');
+  if(checks.permits.checked) out.push('Permit automation: discovery and approved automation for permit intake, document preparation, status visibility, and jurisdiction-specific handoffs.');
+  return out;
+}
+
+function selectedScopeRows(){
+  const rows=[];
+  if(checks.website.checked) rows.push(['A','Website','Mobile-friendly contractor site; service and service-area content; contact / estimate capture; maps, reviews, and basic analytics.']);
+  if(checks.leads.checked) rows.push(['B','Lead Generation','Approved landing pages, call / lead tracking, campaign support, and reporting. Final campaign mix and fee are confirmed before launch.']);
+  if(checks.permits.checked) rows.push(['C','Permit Automation','Discovery and approved workflow for permit intake, document preparation, status visibility, and jurisdiction-specific handoffs.']);
+  return rows;
+}
+function buildAgreement(){
+  const client=value('client')||'[HVAC Company]';
+  const contact=value('contact')||'[Authorized Contact]';
+  const today=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  const depPct=Number($('deposit').value||0);
+  const pending=hasPendingScope();
+  const fixed=fixedTotal();
+  const serviceRows=[];
+  if(checks.website.checked) serviceRows.push(['Website','$499','Included']);
+  if(checks.leads.checked) serviceRows.push(['Lead generation','$1,500-$5,000','Final fee after scope confirmation']);
+  if(checks.permits.checked) serviceRows.push(['Permit automation','Custom','Final fee after discovery']);
+  const commercialStatus=pending?'Selected scoped services require final written pricing before work begins.':'Project total '+money(fixed)+'. Deposit '+depPct+'% ('+money(fixed*depPct/100)+'). Balance due '+value('balance').toLowerCase()+'.';
+  $('agreement').innerHTML=`
+    <div class="agreement-doc">
+      <header class="agreement-head">
+        <div>
+          <div class="agreement-brand">Stewart HVAC · Contractor Services</div>
+          <h3>Service Order &amp; Agreement</h3>
+          <div class="agreement-deck">A plain-language record of what we are taking on, what we need from you, what it costs, and what happens next.</div>
+        </div>
+        <div class="agreement-meta">FORM<br><b>HVAC-01</b><br>DATE<br><b>${esc(today)}</b><br>STATUS<br><b>${pending?'SCOPE CONFIRMATION':'READY TO AUTHORIZE'}</b></div>
+      </header>
+
+      <div class="trust-band"><strong>WE'VE GOT IT.</strong><span>Our job is to make the work clear, keep the next action visible, and tell you quickly when we need something from you. No quiet scope creep. No surprise work. No disappearing act.</span></div>
+
+      <div class="job-grid">
+        <div class="job-item"><small>Contractor</small><b>${esc(client)}</b></div>
+        <div class="job-item"><small>Primary contact</small><b>${esc(contact)}</b></div>
+        <div class="job-item"><small>Service area</small><b>${esc(value('serviceArea')||'To be confirmed')}</b></div>
+        <div class="job-item"><small>Target timing</small><b>${esc(value('timing')||'To be confirmed')}</b></div>
+      </div>
+
+      <section class="doc-section">
+        <div class="doc-section-title">The job</div>
+        <div class="the-job"><b>What needs to be better:</b> ${esc(value('goal')||'Complete the selected contractor services to the agreed scope.')}<br><b>What is getting in the way:</b> ${esc(value('pain')||'Not specified.')}</div>
+      </section>
+
+      <section class="doc-section">
+        <div class="doc-section-title">Work we are taking on</div>
+        <div class="scope-block">${selectedScopeRows().map(r=>`<div class="scope-line"><div class="scope-code">${r[0]}</div><div class="scope-name">${r[1]}</div><div class="scope-desc">${esc(r[2])}</div></div>`).join('')}</div>
+      </section>
+
+      <section class="doc-section">
+        <div class="doc-section-title">Who owns what</div>
+        <div class="ownership-grid">
+          <div class="ownership-box"><h5>Stewart HVAC owns</h5><ul><li>Confirming the scope before work starts.</li><li>Keeping status and the next action visible.</li><li>Flagging blockers, missing information, or approvals promptly.</li><li>Getting written approval before material scope or price changes.</li><li>Delivering the agreed work and a usable handoff.</li></ul></div>
+          <div class="ownership-box"><h5>We need from you</h5><ul><li>Accurate business, service, and project information.</li><li>Timely access to accounts, credentials, assets, and systems we need.</li><li>A person who can answer questions and approve decisions.</li><li>Prompt review when we send work for approval.</li><li>Authority to use any materials or accounts you provide.</li></ul></div>
+        </div>
+      </section>
+
+      <section class="doc-section">
+        <div class="doc-section-title">Price and commercial status</div>
+        <table class="fee-summary"><thead><tr><th>Service</th><th>Status</th><th>Fee</th></tr></thead><tbody>${serviceRows.map(r=>`<tr><td>${r[0]}</td><td>${r[2]}</td><td>${r[1]}</td></tr>`).join('')}<tr class="total"><td colspan="2">Commercial status</td><td>${esc(pending?'Final scope required':money(fixed))}</td></tr></tbody></table>
+        <p style="font-family:var(--sans);font-size:10.5px;margin:8px 0 0"><b>${esc(commercialStatus)}</b></p>
+      </section>
+
+      <section class="doc-section">
+        <div class="doc-section-title">What happens next</div>
+        <div class="next-steps"><div class="next-step"><b>Approve the scope.</b><br>Sign this order or approve the final scoped proposal.</div><div class="next-step"><b>Fund the start.</b><br>Pay the agreed deposit when applicable.</div><div class="next-step"><b>Give us access.</b><br>We collect only the information and credentials needed to do the work.</div><div class="next-step"><b>We work the job.</b><br>We keep the status, blockers, and next action clear through handoff.</div></div>
+      </section>
+
+      <section class="doc-section terms">
+        <div class="doc-section-title">Brass tacks</div>
+        <p><b>Third-party costs.</b> Advertising spend, permit fees, hosting, domains, call-tracking fees, subscriptions, platform charges, and similar outside costs are excluded unless specifically included in writing.</p>
+        <p><b>Lead generation.</b> If marketing is included, we perform the agreed work but cannot guarantee lead volume, rankings, booked jobs, revenue, or return on ad spend. Market conditions, budget, competition, pricing, reputation, seasonality, and call handling matter.</p>
+        <p><b>Permit automation.</b> Final implementation depends on the jurisdictions involved, their requirements and systems, available interfaces, permissions, documents, and the contractor's existing process. Automation does not replace approvals that must be made by a jurisdiction or licensed professional.</p>
+        <p><b>Changes.</b> New pages, campaigns, integrations, jurisdictions, data sources, user roles, or other material changes may require revised pricing. We will identify that before doing the extra work.</p>
+        <p><b>Ownership.</b> After full payment, Client may use the project-specific final deliverables for its business. Stewart HVAC retains its pre-existing tools, reusable components, methods, frameworks, and general-purpose technology. Third-party materials remain subject to their own terms.</p>
+        ${value('notes')?`<p><b>Job-specific notes / exclusions.</b> ${esc(value('notes'))}</p>`:''}
+      </section>
+
+      <section class="doc-section">
+        <div class="doc-section-title">Authorization</div>
+        <p style="font-family:var(--sans);font-size:10.5px;line-height:1.45">By signing, each signer confirms they are authorized to approve this work and accept the scope and commercial terms stated here. Electronic signatures and records may be used where permitted.</p>
+        <div class="signature-grid pro">
+          <div><div style="height:44px"></div><div class="sigline"><b>${esc(client)}</b><br>Authorized signature / printed name / title<br>Date: ____________________</div></div>
+          <div><div style="height:44px"></div><div class="sigline"><b>Stewart HVAC</b><br>Authorized representative<br>Date: ____________________</div></div>
+        </div>
+      </section>
+      <div class="doc-foot"><span>HVAC-01 · REV. 08/2026</span><span>Clear scope · Clear owner · Clear next step</span></div>
+    </div>`;
+  $('agreementSection').classList.remove('hidden');
+  document.body.classList.add('agreement-built');
+  $('agreementSection').scrollIntoView({behavior:'smooth'});
+}
+$('generateAgreement').addEventListener('click',buildAgreement);
+$('printAgreement').addEventListener('click',()=>{buildAgreement();setTimeout(()=>window.print(),250)});
+
+function handoff(){
+  const total=totalLabel();
+  return `HVAC-01 — CONTRACTOR SERVICES HANDOFF
+
+Contractor: ${value('client')||'[not provided]'}
+Contact: ${value('contact')||'[not provided]'}
+Email: ${value('email')||'[not provided]'}
+Phone: ${value('phone')||'[not provided]'}
+Website: ${value('website')||'[not provided]'}
+Service area: ${value('serviceArea')||'[not provided]'}
+
+SERVICES
+${checks.website.checked?'[x] Website':'[ ] Website'}
+${checks.leads.checked?'[x] Lead generation':'[ ] Lead generation'}
+${checks.permits.checked?'[x] Permit automation':'[ ] Permit automation'}
+
+ROUTE
+${route().title}
+
+GOAL
+${value('goal')||'[not provided]'}
+
+CURRENT PAIN
+${value('pain')||'[not provided]'}
+
+OFFERS
+${value('offers')||'[not provided]'}
+
+SYSTEMS
+${value('systems')||'[not provided]'}
+
+PROJECT TOTAL
+${total}
+
+TIMING
+${value('timing')||'[not provided]'}
+
+NOTES / EXCLUSIONS
+${value('notes')||'[none]'}`;
+}
+function clientEmail(){
+  const company=value('client')||'your company';
+  const total=totalLabel();
+  return `Subject: Contractor services scope for ${company}
+
+Hi ${value('contact')||'there'},
+
+Based on what we discussed, I put together a straightforward scope for ${company}.
+
+Included:
+${scopeList().map(x=>'- '+x).join('\n')}
+
+Project total: ${total}
+Target timing: ${value('timing')||'to be confirmed'}
+
+The next step is to review the agreement and confirm the scope. If anything should be changed before we move forward, send it over and we’ll adjust it.
+
+Best,
+Stewart HVAC`;
+}
+async function copy(text,btn){
+  try{
+    await navigator.clipboard.writeText(text);
+    const old=btn.textContent;btn.textContent='Copied';
+    setTimeout(()=>btn.textContent=old,1200);
+  }catch(e){prompt('Copy:',text)}
+}
+$('copySummary').addEventListener('click',e=>copy(handoff(),e.currentTarget));
+$('copyEmail').addEventListener('click',e=>copy(clientEmail(),e.currentTarget));
+
+const fields=['client','contact','email','phone','website','serviceArea','goal','pain','offers','systems','deposit','balance','timing','notes'];
+$('saveDraft').addEventListener('click',e=>{
+  const data={};
+  fields.forEach(id=>data[id]=$(id).value);
+  data.svcWebsite=checks.website.checked;
+  data.svcLeads=checks.leads.checked;
+  data.svcPermits=checks.permits.checked;
+  localStorage.setItem('hvac01Draft',JSON.stringify(data));
+  const b=e.currentTarget,old=b.textContent;b.textContent='Saved';setTimeout(()=>b.textContent=old,1200);
+});
+$('clearDraft').addEventListener('click',()=>{
+  localStorage.removeItem('hvac01Draft');
+  location.reload();
+});
+(function load(){
+  const raw=localStorage.getItem('hvac01Draft'); if(!raw){updateAll();return}
+  try{
+    const d=JSON.parse(raw);
+    fields.forEach(id=>{if(d[id]!==undefined) $(id).value=d[id]});
+    checks.website.checked=d.svcWebsite!==false;
+    checks.leads.checked=!!d.svcLeads;
+    checks.permits.checked=!!d.svcPermits;
+    syncServices();
+  }catch(e){updateAll()}
+})();
+</script>
+</body>
+</html>
