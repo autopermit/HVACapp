@@ -2,10 +2,38 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f3f3ef">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<!-- ── Primary Meta ─────────────────────────────────────────────── -->
 <title>HVAC-01 — Contractor Services Order & Scope Worksheet</title>
-<meta name="description" content="Contractor services order worksheet for websites, lead generation, and permit automation.">
+
+
+<!-- ── Favicons ─────────────────────────────────────────────────────────── -->
+<link rel="icon" type="image/png" href="hvacapp-favicon.png">
+<link rel="shortcut icon" type="image/png" href="hvacapp-favicon.png">
+<link rel="apple-touch-icon" href="hvacapp-favicon.png">
+
+<!-- ── Open Graph ────────────────────────────────────────────────── -->
+<meta name="description" content="Contractor services order worksheet for websites, lead generation, permit automation, and AI agent installation.">
+<meta property="og:title" content="HVAC-01 — Contractor Services Order & Scope Worksheet">
+<meta property="og:description" content="Contractor services order worksheet for websites, lead generation, permit automation, and AI agent installation.">
+<meta property="og:type" content="website"> 
+<meta property="og:image" content="https://hvacapp.us/stewart_preview.png">
+<meta property="og:image:alt" content="Contractor services order worksheet for websites, lead generation, permit automation, and AI agent installation.">
+<meta property="og:image:type" content="image/png">
+
+<!-- ── Twitter / X Card ─────────────────────────────────────────────────── -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HVAC-01 — Contractor Services Order & Scope Worksheet">
+<meta name="description" content="Contractor services order worksheet for websites, lead generation, permit automation, and AI agent installation.">
+<meta name="twitter:image" content="https://hvacapp.us/stewart_preview.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
 :root{
   --paper:#f3f3ef;
@@ -56,9 +84,10 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 2px var(--stamp)}
 .fee-text{font-weight:700;font-family:var(--mono);font-size:12px;display:inline-block;padding:7px 0}
 .fee-text.pending{color:var(--stamp)}
 textarea{min-height:82px;resize:vertical}
-.service-grid{display:grid;grid-template-columns:repeat(3,1fr)}
-.service{position:relative;padding:18px;border-right:1px solid var(--line);min-height:248px;background:#fff}
-.service:last-child{border-right:0}
+.service-grid{display:grid;grid-template-columns:repeat(2,1fr)}
+.service{position:relative;padding:18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:222px;background:#fff}
+.service:nth-child(2n){border-right:0}
+.service:nth-last-child(-n+2){border-bottom:0}
 .service.selected{background:var(--stamp-soft)}
 .service-top{display:flex;justify-content:space-between;gap:12px}
 .checkline{display:flex;gap:9px;align-items:flex-start}
@@ -147,7 +176,9 @@ textarea{min-height:82px;resize:vertical}
   .form-head{grid-template-columns:1fr}.form-id{border-left:0;border-top:2px solid var(--line);min-width:0}
   .notice{grid-template-columns:1fr}.notice-label{border-right:0;border-bottom:1px solid var(--line)}
   .cols-2,.cols-3,.service-grid,.total-grid{grid-template-columns:1fr}
-  .service{border-right:0;border-bottom:1px solid var(--line)}
+  .service{border-right:0}
+  .service:not(:last-child){border-bottom:1px solid var(--line)}
+  .service:last-child{border-bottom:0}
   .total-notes{border-right:0;border-bottom:1px solid var(--line)}
   .section-title{grid-template-columns:44px 1fr}.section-help{display:none}
   .signature-grid{grid-template-columns:1fr}
@@ -208,7 +239,7 @@ textarea{min-height:82px;resize:vertical}
 
     <div class="notice worksheet-only">
       <div class="notice-label">Use this form when</div>
-      <div class="notice-copy">The contractor needs to <b>look professional</b>, <b>get more calls</b>, or <b>spend less office time on permits</b>.</div>
+      <div class="notice-copy">The contractor needs to <b>look professional</b>, <b>get more calls</b>, <b>spend less office time on permits</b>, or <b>put routine calls and follow-up on autopilot with AI</b>.</div>
     </div>
 
     <section class="section worksheet-only" id="buyer">
@@ -273,6 +304,22 @@ textarea{min-height:82px;resize:vertical}
           </ul>
           <div class="pricebox"><span>Pricing</span><strong>Custom</strong></div>
         </article>
+
+        <article class="service" data-key="agents">
+          <div class="service-top">
+            <label class="checkline"><input class="service-check" id="svcAgents" type="checkbox"><span><b>AI Agent Installation</b></span></label>
+            <span class="service-code">D</span>
+          </div>
+          <h2>Never Miss a Call</h2>
+          <div class="outcome">An AI agent that answers, qualifies, and books jobs around the clock.</div>
+          <ul>
+            <li>AI phone / chat agent trained on your services and pricing</li>
+            <li>Automated scheduling, quoting, and follow-up</li>
+            <li>CRM and calendar integration</li>
+            <li>Human handoff for complex or urgent calls</li>
+          </ul>
+          <div class="pricebox"><span>Pricing</span><strong>Custom</strong></div>
+        </article>
       </div>
     </section>
 
@@ -294,6 +341,7 @@ textarea{min-height:82px;resize:vertical}
           <tr><td>A</td><td>Contractor website</td><td id="incWebsite">Yes</td><td class="money"><span class="fee-text">$499</span></td></tr>
           <tr><td>B</td><td>Lead generation</td><td id="incLeads">No</td><td class="money"><span class="fee-text">$1,500-$5,000</span></td></tr>
           <tr><td>C</td><td>Permit automation</td><td id="incPermits">No</td><td class="money"><span class="fee-text pending">Custom after discovery</span></td></tr>
+          <tr><td>D</td><td>AI agent installation</td><td id="incAgents">No</td><td class="money"><span class="fee-text pending">Custom after discovery</span></td></tr>
         </tbody>
       </table>
       <div class="grid cols-3">
@@ -357,9 +405,10 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const checks = {
   website:$('svcWebsite'),
   leads:$('svcLeads'),
-  permits:$('svcPermits')
+  permits:$('svcPermits'),
+  agents:$('svcAgents')
 };
-const SERVICE_FEES={website:{label:'$499',amount:499},leads:{label:'$1,500-$5,000',amount:null},permits:{label:'Custom after discovery',amount:null}};
+const SERVICE_FEES={website:{label:'$499',amount:499},leads:{label:'$1,500-$5,000',amount:null},permits:{label:'Custom after discovery',amount:null},agents:{label:'Custom after discovery',amount:null}};
 
 function syncServices(source){
   document.querySelectorAll('.service').forEach(card=>{
@@ -369,13 +418,14 @@ function syncServices(source){
   $('incWebsite').textContent=checks.website.checked?'Yes':'No';
   $('incLeads').textContent=checks.leads.checked?'Yes':'No';
   $('incPermits').textContent=checks.permits.checked?'Yes':'No';
+  $('incAgents').textContent=checks.agents.checked?'Yes':'No';
 
 
   updateAll();
 }
 Object.keys(checks).forEach(key=>checks[key].addEventListener('change',()=>syncServices(key)));
 
-function hasPendingScope(){return checks.leads.checked||checks.permits.checked}
+function hasPendingScope(){return checks.leads.checked||checks.permits.checked||checks.agents.checked}
 function fixedTotal(){return checks.website.checked ? 499 : 0}
 function totalLabel(){return hasPendingScope() ? (fixedTotal()?money(fixedTotal())+' + scoped services':'Pending final scope') : money(fixedTotal())}
 function depositLabel(){if(hasPendingScope()) return 'Set with final scope'; const dep=Number($('deposit').value||0)/100; return money(fixedTotal()*dep)}
@@ -383,6 +433,10 @@ function route(){
   if(checks.permits.checked) return {
     title:'Permit Discovery',
     copy:'Permit automation is the highest-complexity route. Confirm jurisdictions, forms, systems, credentials, handoffs, and human steps before making a final implementation commitment.'
+  };
+  if(checks.agents.checked) return {
+    title:'Agent Discovery',
+    copy:'AI agent installation depends on the phone system, CRM, and dispatch workflow already in place. Confirm call volume, integrations, and escalation rules before scoping final price.'
   };
   if(checks.leads.checked) return {
     title:'Lead Generation',
@@ -412,6 +466,7 @@ function scopeList(){
   if(checks.website.checked) out.push('Website: mobile-friendly contractor site, service / service-area content, contact and estimate capture, maps / reviews, and basic analytics.');
   if(checks.leads.checked) out.push('Lead generation: approved landing pages, tracking, campaign support, and reporting within the agreed scope.');
   if(checks.permits.checked) out.push('Permit automation: discovery and approved automation for permit intake, document preparation, status visibility, and jurisdiction-specific handoffs.');
+  if(checks.agents.checked) out.push('AI agent installation: discovery and approved setup of an AI phone/chat agent for scheduling, quoting, and follow-up, with human handoff for complex calls.');
   return out;
 }
 
@@ -420,6 +475,7 @@ function selectedScopeRows(){
   if(checks.website.checked) rows.push(['A','Website','Mobile-friendly contractor site; service and service-area content; contact / estimate capture; maps, reviews, and basic analytics.']);
   if(checks.leads.checked) rows.push(['B','Lead Generation','Approved landing pages, call / lead tracking, campaign support, and reporting. Final campaign mix and fee are confirmed before launch.']);
   if(checks.permits.checked) rows.push(['C','Permit Automation','Discovery and approved workflow for permit intake, document preparation, status visibility, and jurisdiction-specific handoffs.']);
+  if(checks.agents.checked) rows.push(['D','AI Agent Installation','Discovery and approved setup of an AI phone/chat agent trained on your services and pricing, with scheduling, CRM integration, and human handoff for complex or urgent calls.']);
   return rows;
 }
 function buildAgreement(){
@@ -433,6 +489,7 @@ function buildAgreement(){
   if(checks.website.checked) serviceRows.push(['Website','$499','Included']);
   if(checks.leads.checked) serviceRows.push(['Lead generation','$1,500-$5,000','Final fee after scope confirmation']);
   if(checks.permits.checked) serviceRows.push(['Permit automation','Custom','Final fee after discovery']);
+  if(checks.agents.checked) serviceRows.push(['AI agent installation','Custom','Final fee after discovery']);
   const commercialStatus=pending?'Selected scoped services require final written pricing before work begins.':'Project total '+money(fixed)+'. Deposit '+depPct+'% ('+money(fixed*depPct/100)+'). Balance due '+value('balance').toLowerCase()+'.';
   $('agreement').innerHTML=`
     <div class="agreement-doc">
@@ -488,6 +545,7 @@ function buildAgreement(){
         <p><b>Third-party costs.</b> Advertising spend, permit fees, hosting, domains, call-tracking fees, subscriptions, platform charges, and similar outside costs are excluded unless specifically included in writing.</p>
         <p><b>Lead generation.</b> If marketing is included, we perform the agreed work but cannot guarantee lead volume, rankings, booked jobs, revenue, or return on ad spend. Market conditions, budget, competition, pricing, reputation, seasonality, and call handling matter.</p>
         <p><b>Permit automation.</b> Final implementation depends on the jurisdictions involved, their requirements and systems, available interfaces, permissions, documents, and the contractor's existing process. Automation does not replace approvals that must be made by a jurisdiction or licensed professional.</p>
+        <p><b>AI agent installation.</b> Deployment scope depends on the phone system, CRM, scheduling, and dispatch tools already in place, plus call volume and desired escalation rules. We configure, connect, and tune the agent to the agreed scope, but cannot guarantee call resolution rate, customer adoption, or downstream business outcomes.</p>
         <p><b>Changes.</b> New pages, campaigns, integrations, jurisdictions, data sources, user roles, or other material changes may require revised pricing. We will identify that before doing the extra work.</p>
         <p><b>Ownership.</b> After full payment, Client may use the project-specific final deliverables for its business. Stewart HVAC retains its pre-existing tools, reusable components, methods, frameworks, and general-purpose technology. Third-party materials remain subject to their own terms.</p>
         ${value('notes')?`<p><b>Job-specific notes / exclusions.</b> ${esc(value('notes'))}</p>`:''}
@@ -525,6 +583,7 @@ SERVICES
 ${checks.website.checked?'[x] Website':'[ ] Website'}
 ${checks.leads.checked?'[x] Lead generation':'[ ] Lead generation'}
 ${checks.permits.checked?'[x] Permit automation':'[ ] Permit automation'}
+${checks.agents.checked?'[x] AI agent installation':'[ ] AI agent installation'}
 
 ROUTE
 ${route().title}
@@ -587,6 +646,7 @@ $('saveDraft').addEventListener('click',e=>{
   data.svcWebsite=checks.website.checked;
   data.svcLeads=checks.leads.checked;
   data.svcPermits=checks.permits.checked;
+  data.svcAgents=checks.agents.checked;
   localStorage.setItem('hvac01Draft',JSON.stringify(data));
   const b=e.currentTarget,old=b.textContent;b.textContent='Saved';setTimeout(()=>b.textContent=old,1200);
 });
@@ -602,6 +662,7 @@ $('clearDraft').addEventListener('click',()=>{
     checks.website.checked=d.svcWebsite!==false;
     checks.leads.checked=!!d.svcLeads;
     checks.permits.checked=!!d.svcPermits;
+    checks.agents.checked=!!d.svcAgents;
     syncServices();
   }catch(e){updateAll()}
 })();
